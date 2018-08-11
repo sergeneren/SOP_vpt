@@ -20,10 +20,10 @@ Please see the examples folder for test.
 
 * **Sergen Eren** - *website* [Vimeo](Vimeo.com/sergeneren)
 
-##License
+## License
 This project is licensed under GNU General Public License v3.0
 
-##Acknowledgments
+## Acknowledgments
 * [PBRT](https://github.com/mmp/pbrt-v3/) - *Big thanks to Matt Pharr, Wenzel Jakob and Greg Humphreys*
 * [SmallPaint](https://users.cg.tuwien.ac.at/zsolnai/gfx/smallpaint/) - pbrt implementation by Károly Zsolnai-Fehér
 * [TUWIEN Rendering](https://youtu.be/pjc1QAI6zS0) - *Youtube playlist by Károly Zsolnai-Fehér*
