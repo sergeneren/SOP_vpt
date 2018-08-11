@@ -2,7 +2,7 @@
 /src/VS_SOPvpt/.vs
 /src/VS_SOPvpt/Debug
 /src/VS_SOPvpt/Release
-
+/tests/backup
 *.exp
 *.o
 *.lib

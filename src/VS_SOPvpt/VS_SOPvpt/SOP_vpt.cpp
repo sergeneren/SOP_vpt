@@ -147,6 +147,26 @@ OP_ERROR SOP_vpt::cookMySop(OP_Context & context)
 	float maxdist = MAXDIST(t); 
 	float steprate = STEPRATE(t); 
 	
+	//Get inputs
+	
+	const GU_Detail *cam_gdp	= inputGeo(1);
+	const GU_Detail *prim_gdp	= inputGeo(2);
+	const GU_Detail *vol_gdp	= inputGeo(3);
+	const GU_Detail *light_gdp	= inputGeo(4);
+
+
+	GA_RWHandleV3 Cd(gdp->addFloatTuple(GA_ATTRIB_PRIMITIVE, "Cd" , 3)); 
+	UT_Vector3F cd_val(1, 1, 1); 
+	
+	const GA_Primitive *prim; 
+	GA_Offset prim_offset; 
+	for (GA_Iterator prim_it(gdp->getPrimitiveRange()); !prim_it.atEnd(); ++prim_it) {
+		
+		Cd.set(*prim_it, color); 
+	}
+
+	Cd.bumpDataId();
+
 	return error();
 }
 
