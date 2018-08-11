@@ -1,1 +1,8 @@
 /src/backup
+/src/VS_SOPvpt/.vs
+/src/VS_SOPvpt/Debug
+/src/VS_SOPvpt/Release
+
+*.exp
+*.o
+*.lib

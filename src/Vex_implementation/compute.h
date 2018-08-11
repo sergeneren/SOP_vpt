@@ -40,7 +40,7 @@ struct rayData {
 
 
 void compute(vector cam, L, dir, outColor, opacity , scattering, absorption;
-			float maxdist, sh_density;
+			float maxdist, sh_density, step_rate;
 			int indirect_samples, volume_index) {
 
 	vector extinction = absorption + scattering;
@@ -78,15 +78,19 @@ void compute(vector cam, L, dir, outColor, opacity , scattering, absorption;
 		float pdf;
 
 
-		float step_rate = 0.1; 
+		
 		float diagonal = volumevoxeldiameter(volume_index, "density") * 0.577350269;// divide by sqrt(3)
-		float step_size = diagonal / step_rate; 
+		float step_size = diagonal / step_rate;
 
 		
 		while (offset < ray_len && (max(transmittance) > 0.0001)) {
 			vector pos = p[0] + dir * offset; 
 			density = volumesample(volume_index, "density", pos); 
 			transmittance *= exp(-density * extinction * step_size); 
+			float shad = vol_shadow(pos, L); 
+
+			if(density>0) outColor = (1 - transmittance) * (1 - shad); 
+			
 			pdf = luminance(transmittance * density * scattering);
 			sum_pdfs += pdf;
 		
