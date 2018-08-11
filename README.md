@@ -27,4 +27,4 @@ This project is licensed under GNU General Public License v3.0
 * [PBRT](https://github.com/mmp/pbrt-v3/) - *Big thanks to Matt Pharr, Wenzel Jakob and Greg Humphreys*
 * [SmallPaint](https://users.cg.tuwien.ac.at/zsolnai/gfx/smallpaint/) - pbrt implementation by Károly Zsolnai-Fehér
 * [TUWIEN Rendering](https://youtu.be/pjc1QAI6zS0) - *Youtube playlist by Károly Zsolnai-Fehér*
-* [XAPKOHHEH] (https://vimeo.com/189423315) - Vex raytracer
+* [XAPKOHHEH](https://vimeo.com/189423315) - Vex raytracer
