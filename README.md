@@ -12,11 +12,14 @@ Open Houdini "Command Line Tools", cd to directory containing "SOP_vpt.cpp" and 
 ```
 hcustom  SOP_vpt.cpp
 ```
- This will create a file called "SOP_vpt.dll" in "~documents/houdini<HOUDINI_VERSION>/dso/" folder. SOP_vpt will be automatically loaded at first start of houdini. If you cant see SOP_vpt at SOP level please check that your HOUDINI_DSO_PATH environment is not a custom one and the dll is placed under right folder.  
+ This will create a file called **SOP_vpt.dll** in *~documents/houdini<HOUDINI_VERSION>/dso/* folder. SOP_vpt will be automatically loaded at first start of houdini. If you cant see the node at SOP level please check that your HOUDINI_DSO_PATH environment is not a custom one and the dll is placed under right folder
  
 ### Tests
- 
-Please see the examples folder for test.  
+* Tested with Houdini 16.0.633
+* Tested with Houdini 16.5.536
+
+### Examples
+Please see the examples folder
 
 ## Author
 
@@ -27,6 +30,6 @@ This project is licensed under GNU General Public License v3.0
 
 ## Acknowledgments
 * [PBRT](https://github.com/mmp/pbrt-v3/) - *Big thanks to Matt Pharr, Wenzel Jakob and Greg Humphreys*
-* [SmallPaint](https://users.cg.tuwien.ac.at/zsolnai/gfx/smallpaint/) - pbrt implementation by Károly Zsolnai-Fehér
+* [SmallPaint](https://users.cg.tuwien.ac.at/zsolnai/gfx/smallpaint/) - *pbrt implementation by Károly Zsolnai-Fehér*
 * [TUWIEN Rendering](https://youtu.be/pjc1QAI6zS0) - *Youtube playlist by Károly Zsolnai-Fehér*
-* [XAPKOHHEH](https://vimeo.com/189423315) - Vex raytracer
+* [XAPKOHHEH](https://vimeo.com/189423315) - *Vex raytracer*
