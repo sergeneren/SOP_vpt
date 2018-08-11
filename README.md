@@ -18,7 +18,7 @@ Please see the examples folder for test.
 
 ## Author
 
-* **Sergen Eren** - *website* [Vimeo](Vimeo.com/sergeneren)
+* **Sergen Eren** - *website* - [Vimeo](Vimeo.com/sergeneren)
 
 ## License
 This project is licensed under GNU General Public License v3.0
