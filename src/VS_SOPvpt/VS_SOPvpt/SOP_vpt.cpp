@@ -158,11 +158,14 @@ OP_ERROR SOP_vpt::cookMySop(OP_Context & context)
 	GA_RWHandleV3 Cd(gdp->addFloatTuple(GA_ATTRIB_PRIMITIVE, "Cd" , 3)); 
 	UT_Vector3F cd_val(1, 1, 1); 
 	
+	GA_ROHandleV3 cam_h(cam_gdp, GA_ATTRIB_POINT, "P"); 
+	UT_Vector3F cam = cam_h.get(0); 
+
 	const GA_Primitive *prim; 
 	GA_Offset prim_offset; 
 	for (GA_Iterator prim_it(gdp->getPrimitiveRange()); !prim_it.atEnd(); ++prim_it) {
 		
-		Cd.set(*prim_it, color); 
+		Cd.set(*prim_it, cam);
 	}
 
 	Cd.bumpDataId();
