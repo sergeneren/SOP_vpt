@@ -92,9 +92,9 @@ namespace VPT {
 		// End vector evaluaters
 
 		UT_Vector2 RES(fpreal t)		{ return evalVector2("res", t); }
-		int		   SPP(fpreal t)		{ return evalInt("spp", 0, t); }
-		int		   DEPTH(fpreal t)		{ return evalInt("depth", 0, t); }
-		int		   VS(fpreal t)			{ return evalInt("vs", 0, t); }
+		size_t		   SPP(fpreal t)		{ return evalInt("spp", 0, t); }
+		size_t		   DEPTH(fpreal t)		{ return evalInt("depth", 0, t); }
+		size_t		   VS(fpreal t)			{ return evalInt("vs", 0, t); }
 		fpreal	   SIZEX(fpreal t)		{ return evalFloat("sizex", 0, t); }
 		UT_Vector3 COLOR(fpreal t)		{ return evalVector3("color", t); }
 		UT_Vector3 ATTN(fpreal t)		{ return evalVector3("attenuation", t); }

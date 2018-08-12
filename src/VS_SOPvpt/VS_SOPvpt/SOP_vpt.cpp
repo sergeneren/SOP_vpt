@@ -32,7 +32,7 @@
 
 
 #include "SOP_vpt.h"
-
+#include "Integrator.h"
 
 //Houdini
 #include <GU/GU_Detail.h>
@@ -48,6 +48,7 @@
 #include <UT/UT_ThreadedAlgorithm.h>
 #include <UT/UT_ThreadedIO.h>
 #include <GA/GA_PageHandle.h>
+#include <GA/GA_IntrinsicMacros.h>
 #include <GA/GA_PageIterator.h>
 #include <GU/GU_Prim.h>
 #include <GU/GU_RayIntersect.h>
@@ -136,9 +137,9 @@ OP_ERROR SOP_vpt::cookMySop(OP_Context & context)
 	GA_Index index; 
 	
 	UT_Vector2 res = RES(t); 
-	unsigned int spp = SPP(t); 
-	unsigned int depth = DEPTH(t); 
-	unsigned int vs = VS(t); 
+	size_t spp = SPP(t);
+	size_t depth = DEPTH(t);
+	size_t vs = VS(t);
 	float sizex = SIZEX(t); 
 	UT_Vector3 color = COLOR(t); 
 	UT_Vector3 attenuation = ATTN(t); 
@@ -154,22 +155,57 @@ OP_ERROR SOP_vpt::cookMySop(OP_Context & context)
 	const GU_Detail *vol_gdp	= inputGeo(3);
 	const GU_Detail *light_gdp	= inputGeo(4);
 
+	//Scene Preprocess
+	
+	
+	//Check Cam
+	size_t cam_pts = cam_gdp->getNumPoints();
+	if (cam_pts != 1) opError(OP_ERR_INVALID_SRC,"Camera input accepts a single point!!!"); 
+	
+	//Prepare Lights
+	GA_Range light_pt_range = light_gdp->getPointRange();
+	if (light_pt_range.isEmpty()) return error();
+	GA_ROHandleV3 light_pos(light_gdp->getP()); 
+	GA_ROHandleV3 light_color(light_gdp->findPointVectorAttrib("Cd"));
+	GA_ROHandleI light_type(light_gdp, GA_ATTRIB_POINT, "type");
+	
+	UT_Array<Light> lights; 
+	for (GA_Iterator it(light_pt_range.begin()); !it.atEnd(); ++it) {
+
+		lights.append();
+		if(light_pos.isValid()) lights[it.getOffset()].pos = light_pos.get(it.getOffset());
+		else lights[it.getOffset()].pos.assign(0,0,0); 
+
+		if(light_color.isValid()) lights[it.getOffset()].color = light_color.get(it.getOffset());
+		else lights[it.getOffset()].color.assign(0,0,0); 
+
+		if(light_type.isValid()) lights[it.getOffset()].type = light_type.get(it.getOffset());
+		else lights[it.getOffset()].type = 0; 
+	}
+	
 
 	GA_RWHandleV3 Cd(gdp->addFloatTuple(GA_ATTRIB_PRIMITIVE, "Cd" , 3)); 
-	UT_Vector3F cd_val(1, 1, 1); 
+	GA_RWHandleV3 P(gdp->addFloatTuple(GA_ATTRIB_PRIMITIVE, "pos", 3));
 	
 	GA_ROHandleV3 cam_h(cam_gdp, GA_ATTRIB_POINT, "P"); 
 	UT_Vector3F cam = cam_h.get(0); 
 
-	const GA_Primitive *prim; 
+	GU_RayIntersect *isect = new GU_RayIntersect(prim_gdp);
+	
+	GA_Primitive *prim;
+	
 	GA_Offset prim_offset; 
-	for (GA_Iterator prim_it(gdp->getPrimitiveRange()); !prim_it.atEnd(); ++prim_it) {
-		
-		Cd.set(*prim_it, cam);
+	for (GA_Iterator prim_it(gdp->getPrimitiveRange()); !prim_it.atEnd(); ++prim_it) { 
+		prim = gdp->getPrimitive(prim_it.getOffset());
+		Integrator *integrator = new Integrator; 
+		UT_Vector3F color(0,0,0);
+		UT_Vector3 pos = P.get(prim_it.getOffset());
+		color = integrator->render(cam ,pos, prim_gdp, isect, &lights);
+		Cd.set(*prim_it, color);
 	}
 
 	Cd.bumpDataId();
-
+	
 	return error();
 }
 
