@@ -9,6 +9,9 @@
 #include "Light.h"
 
 
+#ifndef __Integrator_h__
+#define __Integrator_h__
+
 namespace VPT {
 
 	class Integrator {
@@ -23,7 +26,6 @@ namespace VPT {
 			UT_Array<Light> *lights, 
 			size_t depth=5) {
 			
-			
 			UT_Vector3F Li(0, 0, 0); 
 
 			GU_RayInfo hit_info;
@@ -32,7 +34,6 @@ namespace VPT {
 			hit_info.init(1e2F, 0.001F, GU_FIND_CLOSEST);
 			int numhit = isect->sendRay(orig, dir, hit_info);
 			hit_info.reset();
-			 
 			
 			if (numhit) {
 				const GA_Primitive *prim = hit_info.myPrim;
@@ -50,9 +51,9 @@ namespace VPT {
 	protected:
 		
 		virtual  ~Integrator() {};
-	
-	
+
 	};
 
 }
 
+#endif

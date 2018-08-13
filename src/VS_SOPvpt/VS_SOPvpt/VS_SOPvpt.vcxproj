@@ -119,6 +119,7 @@
   <ItemGroup>
     <ClInclude Include="Integrator.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Sampler.h" />
     <ClInclude Include="SOP_vpt.h" />
   </ItemGroup>
   <ItemGroup>

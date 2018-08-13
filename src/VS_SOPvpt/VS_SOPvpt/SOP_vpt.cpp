@@ -19,20 +19,23 @@
 *    STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 *    EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *
-* Source repository: https://github.com/sergeneren/SOP_vpt
+*	 Source repository: https://github.com/sergeneren/SOP_vpt
 */
 
 
 /*! \file
 *
 *   SOP level volumetric path tracer implementation header file
-*	builds the baseline for SOP_vpt
+*	This is the gate that houdini loads SOP_vpt.dll  
 *
 */
 
 
+//Local
+
 #include "SOP_vpt.h"
 #include "Integrator.h"
+#include "Sampler.h"
 
 //Houdini
 #include <GU/GU_Detail.h>
@@ -52,7 +55,6 @@
 #include <GA/GA_PageIterator.h>
 #include <GU/GU_Prim.h>
 #include <GU/GU_RayIntersect.h>
-
 
 //C++
 
