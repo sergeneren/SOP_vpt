@@ -1,4 +1,11 @@
 
+/*! \file
+*
+*	Sampler base class. This class is for sampling input parameters for MC integration
+*
+*/
+
+
 #include <GU/GU_Detail.h>
 
 

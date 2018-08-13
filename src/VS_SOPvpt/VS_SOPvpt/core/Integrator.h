@@ -1,4 +1,10 @@
 
+/*! \file
+*
+*	Integrator base class. All children must implement their own render() 
+*
+*/
+
 
 #include <GU/GU_Detail.h>
 #include <SYS/SYS_Math.h>

@@ -46,18 +46,9 @@
 #include <PRM/PRM_Include.h>
 #include <UT/UT_DSOVersion.h>
 #include <UT/UT_Interrupt.h>
-#include <SYS/SYS_Math.h>
 #include <SOP/SOP_Node.h>
-#include <UT/UT_ThreadedAlgorithm.h>
-#include <UT/UT_ThreadedIO.h>
-#include <GA/GA_PageHandle.h>
-#include <GA/GA_IntrinsicMacros.h>
-#include <GA/GA_PageIterator.h>
-#include <GU/GU_Prim.h>
-#include <GU/GU_RayIntersect.h>
 
 //C++
-
 
 
 using namespace VPT; 
@@ -130,13 +121,10 @@ OP_ERROR SOP_vpt::cookMySop(OP_Context & context)
 	
 	OP_AutoLockInputs inputs(this); 
 	if (inputs.lock(context) >= UT_ERROR_ABORT) return error(); 
-	
 	duplicateSource(0, context); 
-
 	addMessage(SOP_MESSAGE, "Path traces a given scene to grid"); 
 	
 	fpreal t = context.getTime();
-	GA_Index index; 
 	
 	UT_Vector2 res = RES(t); 
 	size_t spp = SPP(t);
@@ -185,6 +173,15 @@ OP_ERROR SOP_vpt::cookMySop(OP_Context & context)
 		else lights[it.getOffset()].type = 0; 
 	}
 	
+	UT_Interrupt *interrupt;
+	interrupt = UTgetInterrupt();
+
+	interrupt->setEnabled(1, 0);
+	interrupt->setAppTitle("Interrupt test"); 
+	interrupt->setLongOpText("long text"); 
+	interrupt->setLongPercent(0); 
+	interrupt->setInterruptable(1); 
+	interrupt->opInterrupt(5);
 
 	GA_RWHandleV3 Cd(gdp->addFloatTuple(GA_ATTRIB_PRIMITIVE, "Cd" , 3)); 
 	GA_RWHandleV3 P(gdp->addFloatTuple(GA_ATTRIB_PRIMITIVE, "pos", 3));

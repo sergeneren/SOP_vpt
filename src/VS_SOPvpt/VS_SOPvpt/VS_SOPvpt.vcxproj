@@ -117,7 +117,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Ray.h" />
     <ClInclude Include="Integrator.h" />
+    <ClInclude Include="Interaction.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="SOP_vpt.h" />
