@@ -39,6 +39,7 @@ namespace VPT {
 			dir.normalize();
 			hit_info.init(1e2F, 0.001F, GU_FIND_CLOSEST);
 			int numhit = isect->sendRay(orig, dir, hit_info);
+			
 			hit_info.reset();
 			
 			if (numhit) {

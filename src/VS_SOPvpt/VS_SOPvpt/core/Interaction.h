@@ -22,6 +22,13 @@ namespace VPT {
 		~Interaction() {};
 
 
+
+
+
+		UT_Vector3 p; 
+
+
+
 	};
 
 }

@@ -117,12 +117,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Ray.h" />
-    <ClInclude Include="Integrator.h" />
-    <ClInclude Include="Interaction.h" />
-    <ClInclude Include="Light.h" />
-    <ClInclude Include="Sampler.h" />
+    <ClInclude Include="Constants.h" />
+    <ClInclude Include="core\Camera.h" />
+    <ClInclude Include="core\Integrator.h" />
+    <ClInclude Include="core\Interaction.h" />
+    <ClInclude Include="core\Light.h" />
+    <ClInclude Include="core\Ray.h" />
+    <ClInclude Include="core\Sampler.h" />
     <ClInclude Include="SOP_vpt.h" />
   </ItemGroup>
   <ItemGroup>

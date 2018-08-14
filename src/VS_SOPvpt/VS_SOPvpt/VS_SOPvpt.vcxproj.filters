@@ -18,22 +18,25 @@
     <ClInclude Include="SOP_vpt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Light.h">
+    <ClInclude Include="Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Integrator.h">
+    <ClInclude Include="core\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sampler.h">
+    <ClInclude Include="core\Integrator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="core\Interaction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Interaction.h">
+    <ClInclude Include="core\Light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ray.h">
+    <ClInclude Include="core\Ray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Sampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

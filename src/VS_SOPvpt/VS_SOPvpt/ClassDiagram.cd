@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="VPT::Sampler" Collapsed="true">
+    <Position X="5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>core\Sampler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VPT::Integrator" Collapsed="true">
+    <Position X="6.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>core\Integrator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VPT::Ray" Collapsed="true">
+    <Position X="4.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>core\Ray.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VPT::Light" Collapsed="true">
+    <Position X="6.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABgAAAAAAAAAAICAAAAAAgAAIAAAAAgBAAAAAAAAAAQ=</HashCode>
+      <FileName>core\Light.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VPT::VisibilityTester" Collapsed="true">
+    <Position X="6.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAECAAABAkIAAAAAAAAA=</HashCode>
+      <FileName>core\Light.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VPT::Interaction" Collapsed="true">
+    <Position X="8.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>core\Interaction.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VPT::SOP_vpt" Collapsed="true">
+    <Position X="4.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhAAAAAAgAKgAJEACACAgQAAAIAAAACEAgAAAAAAAAw=</HashCode>
+      <FileName>SOP_vpt.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="VPT::Spectrum" Collapsed="true">
+    <Position X="6.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Constants.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

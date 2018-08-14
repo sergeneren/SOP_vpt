@@ -37,7 +37,6 @@
 #define __SOP_vpt_h__
 
 #include <SOP/SOP_Node.h>
-#include <UT/UT_ThreadedAlgorithm.h>
 #include <GU/GU_Detail.h>
 #include <GA/GA_PageHandle.h>
 

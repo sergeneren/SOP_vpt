@@ -34,8 +34,9 @@
 //Local
 
 #include "SOP_vpt.h"
-#include "Integrator.h"
-#include "Sampler.h"
+#include "core/Integrator.h"
+#include "core/Sampler.h"
+#include "core/Light.h"
 
 //Houdini
 #include <GU/GU_Detail.h>
@@ -122,7 +123,7 @@ OP_ERROR SOP_vpt::cookMySop(OP_Context & context)
 	OP_AutoLockInputs inputs(this); 
 	if (inputs.lock(context) >= UT_ERROR_ABORT) return error(); 
 	duplicateSource(0, context); 
-	addMessage(SOP_MESSAGE, "Path traces a given scene to grid"); 
+	addMessage(SOP_MESSAGE, "Renders a given scene to grid"); 
 	
 	fpreal t = context.getTime();
 	
