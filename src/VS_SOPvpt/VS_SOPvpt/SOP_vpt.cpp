@@ -162,20 +162,13 @@ OP_ERROR SOP_vpt::cookMySop(OP_Context & context)
 	
 	UT_Array<Light> lights; 
 	for (GA_Iterator it(light_pt_range.begin()); !it.atEnd(); ++it) {
-
-		if(light_pos.isValid() && light_color.isValid()) lights.append(createLight(light_pos.get(it.getOffset()) , light_color.get(it.getOffset())));
+		lights.append();
+		if (light_pos.isValid() && light_color.isValid()) {
+			lights[it.getOffset()].pos = light_pos.get(it.getOffset());
+			lights[it.getOffset()].color = light_color.get(it.getOffset());
+		}
 	}
 	
-	UT_Interrupt *interrupt;
-	interrupt = UTgetInterrupt();
-
-	interrupt->setEnabled(1, 0);
-	interrupt->setAppTitle("Interrupt test"); 
-	interrupt->setLongOpText("long text"); 
-	interrupt->setLongPercent(0); 
-	interrupt->setInterruptable(1); 
-	interrupt->opInterrupt(5);
-
 	GA_RWHandleV3 Cd(gdp->addFloatTuple(GA_ATTRIB_PRIMITIVE, "Cd" , 3)); 
 	GA_RWHandleV3 P(gdp->addFloatTuple(GA_ATTRIB_PRIMITIVE, "pos", 3));
 	
@@ -186,16 +179,20 @@ OP_ERROR SOP_vpt::cookMySop(OP_Context & context)
 	
 	GA_Primitive *prim;
 	
+	Integrator *integrator = new Integrator;
+	GU_RayInfo hit_info;
+	hit_info.init(1e2F, 0.001F, GU_FIND_CLOSEST);
+	
 	GA_Offset prim_offset; 
+	
 	for (GA_Iterator prim_it(gdp->getPrimitiveRange()); !prim_it.atEnd(); ++prim_it) { 
 		prim = gdp->getPrimitive(prim_it.getOffset());
-		Integrator *integrator = new Integrator; 
 		UT_Vector3F color(0,0,0);
 		UT_Vector3 pos = P.get(prim_it.getOffset());
-		color = integrator->render(cam ,pos, prim_gdp, isect, &lights);
+		color = integrator->render(cam ,pos, prim_gdp, isect, hit_info, lights);
 		Cd.set(*prim_it, color);
 	}
-
+	
 	Cd.bumpDataId();
 	
 	return error();

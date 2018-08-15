@@ -23,7 +23,7 @@ namespace VPT {
 	public:
 
 		virtual ~Light() {};
-		Light(UT_Vector3 pos, UT_Vector3 color) : pos(pos), color(color) {};
+		Light() {};
 		
 		/*
 		virtual Spectrum Sample_Li(const Interaction &ref, const UT_Vector2 &u , UT_Vector3 *wi, float *pdf, VisibilityTester *vis) const = 0;
@@ -34,8 +34,8 @@ namespace VPT {
 		virtual void Pdf_le(const Ray &ray, const UT_Vector3 &nLight, float *pdfPos, float *pdfDir) const = 0;
 		*/
 
-		const UT_Vector3 pos;
-		const UT_Vector3 color; 
+		UT_Vector3F pos;
+		UT_Vector3F color; 
 
 		
 
@@ -46,7 +46,7 @@ namespace VPT {
 
 	Light createLight(UT_Vector3 pos, UT_Vector3 color) {
 
-		return Light(pos, color);
+		return Light();
 
 	}
 
@@ -57,23 +57,22 @@ namespace VPT {
 	public:
 		VisibilityTester() {}
 		
-		VisibilityTester(const Interaction &p0, const Interaction &p1) : p0(p0), p1(p1) {}
-		const Interaction &P0() const { return p0; }
-		const Interaction &P1() const { return p1; }
+		VisibilityTester(const UT_Vector3 &p0, const UT_Vector3 &p1) : p0(p0), p1(p1) {}
+		const UT_Vector3 &P0() const { return p0; }
+		const UT_Vector3 &P1() const { return p1; }
 		
-		bool Unoccluded(GU_RayIntersect *isect) const {
+		bool Unoccluded(const GU_RayIntersect *isect) const {
 			
-			GU_RayInfo *hitinfo; 
-			hitinfo->init(1e2F, 0.001F, GU_FIND_CLOSEST);
-			isect->sendRay(p0.p, p1.p, *hitinfo);
-
-			return !hitinfo->myHitList->isEmpty();
+			GU_RayInfo hitinfo; 
+			hitinfo.init(1e2F, 0.001F, GU_FIND_CLOSEST);
+			isect->sendRay(p0, p1, hitinfo);
+			return !hitinfo.myHitList->isEmpty();
 		
 		}
 		
 		//UT_Vector3 Tr(const GU_Detail *gdp, Sampler &sampler);
 	private:
-		Interaction p0, p1; 
+		UT_Vector3 p0, p1;
 	};
 	
 	//TODO Area Light

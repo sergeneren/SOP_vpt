@@ -55,4 +55,31 @@ namespace VPT {
 	static constexpr float PiOver4 = 0.78539816339744830961;
 	static constexpr float Sqrt2 = 1.41421356237309504880;
 
+
+
+	UT_Vector3F reflect(UT_Vector3F I, UT_Vector3F N) {
+
+		return I - 2 * N.dot(I) * N;
+	}
+	
+
+	UT_Vector3F refract(const UT_Vector3F &I, const UT_Vector3F &N, const float &ior)
+	{
+		
+		float cosi = SYSclamp(N.dot(I), -1 , 1 ,0);
+		float etai = 1, etat = ior;
+		UT_Vector3F n = N;
+		if (cosi < 0) { cosi = -cosi; }
+		else { std::swap(etai, etat); n = -N; }
+		float eta = etai / etat;
+		float k = 1 - eta * eta * (1 - cosi * cosi);
+		
+		UT_Vector3F ret = eta * I + (eta * cosi - sqrtf(k)) * n;
+		if (k < 0) return ret; 
+		else return UT_Vector3F(0,0,0); 
+	}
+
+
+
+
 }
