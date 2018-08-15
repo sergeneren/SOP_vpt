@@ -56,6 +56,4 @@ namespace VPT {
 	static constexpr float PiOver4 = 0.78539816339744830961;
 	static constexpr float Sqrt2 = 1.41421356237309504880;
 
-
-
 }
