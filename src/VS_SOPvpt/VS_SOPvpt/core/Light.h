@@ -23,22 +23,33 @@ namespace VPT {
 	public:
 
 		virtual ~Light() {};
-		Light(int flags, const GU_Detail *gdp, const MediumInterface &mediumInterface, int nSamples = 1);
+		Light(UT_Vector3 pos, UT_Vector3 color) : pos(pos), color(color) {};
 		
+		/*
 		virtual Spectrum Sample_Li(const Interaction &ref, const UT_Vector2 &u , UT_Vector3 *wi, float *pdf, VisibilityTester *vis) const = 0;
 		virtual Spectrum Power() const = 0;
 		virtual Spectrum Le(const Ray &r ) const = 0;
 		virtual float Pdf_Li(const Interaction &ref, UT_Vector3 *wi) const = 0;
 		virtual Spectrum Sample_Le(const UT_Vector2 &u1, const UT_Vector2 &u2, float time, Ray *ray, UT_Vector3 *nLight, float *pdfPos, float *pdfDir) const = 0;
 		virtual void Pdf_le(const Ray &ray, const UT_Vector3 &nLight, float *pdfPos, float *pdfDir) const = 0;
+		*/
+
+		const UT_Vector3 pos;
+		const UT_Vector3 color; 
+
 		
-		//Public Data
-		const int flags; 
-		const int nSamples; 
 
 
 	private:
 	};
+
+
+	Light createLight(UT_Vector3 pos, UT_Vector3 color) {
+
+		return Light(pos, color);
+
+	}
+
 
 
 	class VisibilityTester {
@@ -60,7 +71,7 @@ namespace VPT {
 		
 		}
 		
-		UT_Vector3 Tr(const GU_Detail *gdp, Sampler &sampler);
+		//UT_Vector3 Tr(const GU_Detail *gdp, Sampler &sampler);
 	private:
 		Interaction p0, p1; 
 	};

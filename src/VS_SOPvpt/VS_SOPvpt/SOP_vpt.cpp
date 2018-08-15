@@ -163,15 +163,7 @@ OP_ERROR SOP_vpt::cookMySop(OP_Context & context)
 	UT_Array<Light> lights; 
 	for (GA_Iterator it(light_pt_range.begin()); !it.atEnd(); ++it) {
 
-		lights.append();
-		if(light_pos.isValid()) lights[it.getOffset()].pos = light_pos.get(it.getOffset());
-		else lights[it.getOffset()].pos.assign(0,0,0); 
-
-		if(light_color.isValid()) lights[it.getOffset()].color = light_color.get(it.getOffset());
-		else lights[it.getOffset()].color.assign(0,0,0); 
-
-		if(light_type.isValid()) lights[it.getOffset()].type = light_type.get(it.getOffset());
-		else lights[it.getOffset()].type = 0; 
+		if(light_pos.isValid() && light_color.isValid()) lights.append(createLight(light_pos.get(it.getOffset()) , light_color.get(it.getOffset())));
 	}
 	
 	UT_Interrupt *interrupt;

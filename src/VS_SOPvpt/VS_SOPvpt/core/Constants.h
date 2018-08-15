@@ -8,7 +8,6 @@ namespace VPT {
 	class Ray; 
 	class RayDifferential; 
 	class Interaciton;
-	class Spectrum; 
 	class SampledSpectrum;
 	class RGBSpectrum; 
 

@@ -32,26 +32,38 @@ namespace VPT {
 			UT_Array<Light> *lights, 
 			size_t depth=5) {
 			
-			UT_Vector3F Li(0, 0, 0); 
+			UT_Vector3F L(0, 0, 0); 
 
 			GU_RayInfo hit_info;
 			UT_Vector3F dir = P - orig; 
 			dir.normalize();
 			hit_info.init(1e2F, 0.001F, GU_FIND_CLOSEST);
+			
 			int numhit = isect->sendRay(orig, dir, hit_info);
 			
+
+			UT_Vector3F n = hit_info.myNml;
+			UT_Vector3F p_isect = UT_Vector3(hit_info.myU, hit_info.myV, hit_info.myW); 
+			UT_Vector3F wo = p_isect - P;
+			wo.normalize();
+
 			hit_info.reset();
 			
+			
+			for (const auto &light : lights) {
+
+
+
+			}
+
 			if (numhit) {
-				const GA_Primitive *prim = hit_info.myPrim;
-				GA_ROHandleV3 N(prim_gdp, GA_ATTRIB_PRIMITIVE, "N");
-				UT_Vector3 n = N.get(prim->getMapOffset());
-;				//Li.assign(n);
+				
 				return n;
 
 			}else{
-				Li.assign(0.0F, 0.573F, 0.9F);
-				return Li;
+				
+				L.assign(0.0F, 0.573F, 0.9F);
+				return L;
 			}
 		};
 	
