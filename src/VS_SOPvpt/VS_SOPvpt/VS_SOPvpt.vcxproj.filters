@@ -39,10 +39,21 @@
     <ClInclude Include="core\Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="renderHub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SOP_vpt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="renderHub.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="render_kernels.cu">
+      <Filter>Source Files</Filter>
+    </CudaCompile>
   </ItemGroup>
 </Project>

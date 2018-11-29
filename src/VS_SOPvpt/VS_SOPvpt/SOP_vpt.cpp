@@ -34,9 +34,7 @@
 //Local
 
 #include "SOP_vpt.h"
-#include "core/Integrator.h"
-#include "core/Sampler.h"
-#include "core/Light.h"
+#include "renderHub.h"
 
 //Houdini
 #include <GU/GU_Detail.h>
@@ -51,8 +49,9 @@
 
 //C++
 
+using namespace VPT;
 
-using namespace VPT; 
+
 
 void newSopOperator(OP_OperatorTable *table) {
 
@@ -160,6 +159,7 @@ OP_ERROR SOP_vpt::cookMySop(OP_Context & context)
 	GA_ROHandleV3 light_color(light_gdp->findPointVectorAttrib("Cd"));
 	GA_ROHandleI light_type(light_gdp, GA_ATTRIB_POINT, "type");
 	
+	/*
 	UT_Array<Light> lights; 
 	for (GA_Iterator it(light_pt_range.begin()); !it.atEnd(); ++it) {
 		lights.append();
@@ -168,33 +168,71 @@ OP_ERROR SOP_vpt::cookMySop(OP_Context & context)
 			lights[it.getOffset()].color = light_color.get(it.getOffset());
 		}
 	}
+	*/
+
+	//Prepare scene data
+	GA_ROHandleV3 cam_h(cam_gdp, GA_ATTRIB_POINT, "P");
+	UT_Vector3F cam = cam_h.get(0);
+
+	int sphere_pts = prim_gdp->getNumPoints();
+	UT_Vector3F * sphere_positions = new UT_Vector3F[sphere_pts];
+	UT_Vector3F * sphere_colors = new UT_Vector3F[sphere_pts];
 	
+
+	GA_ROHandleV3 sphere_pos(prim_gdp->getP());
+	GA_ROHandleV3 sphere_col(prim_gdp->findPointVectorAttrib("Cd"));
+
+	GA_Range sphere_pt_range = prim_gdp->getPointRange();
+	int n = 0;
+	for (GA_Iterator it(sphere_pt_range.begin()); !it.atEnd(); ++it) {
+		if (sphere_pos.isValid() && sphere_col.isValid()) {
+			sphere_positions[n] = sphere_pos.get(it.getOffset());
+			sphere_colors[n] = sphere_col.get(it.getOffset());
+			n++;
+		}
+	}
+	
+	// End scene data
+
+
 	GA_RWHandleV3 Cd(gdp->addFloatTuple(GA_ATTRIB_PRIMITIVE, "Cd" , 3)); 
 	GA_RWHandleV3 P(gdp->addFloatTuple(GA_ATTRIB_PRIMITIVE, "pos", 3));
 	
-	GA_ROHandleV3 cam_h(cam_gdp, GA_ATTRIB_POINT, "P"); 
-	UT_Vector3F cam = cam_h.get(0); 
+	 
 
-	GU_RayIntersect *isect = new GU_RayIntersect(prim_gdp);
 	
 	GA_Primitive *prim;
 	
-	Integrator *integrator = new Integrator;
-	GU_RayInfo hit_info;
-	hit_info.init(1e2F, 0.001F, GU_FIND_CLOSEST);
+	int width = res.y();
+	int height = res.x();
+
+
+	UT_Vector3F *pix = new UT_Vector3F[width*height];
+
+	for (int row = 0; row < height; row++) {
+		for (int col = 0; col < width; col++) {
+			float pixel_value = (row * width + col) / float(height*width);
+			int pixel_index = row * width + col;
+			pix[pixel_index] = UT_Vector3F(pixel_value, 0, 0);
+		}
+	}
+
+	//render scene
+	render(pix, cam, sphere_pts, sphere_positions, sphere_colors,  width, height,spp, 30, 0.25, 16, 16);
+
 	
 	GA_Offset prim_offset; 
-	
 	for (GA_Iterator prim_it(gdp->getPrimitiveRange()); !prim_it.atEnd(); ++prim_it) { 
 		prim = gdp->getPrimitive(prim_it.getOffset());
-		UT_Vector3F color(0,0,0);
-		UT_Vector3 pos = P.get(prim_it.getOffset());
-		color = integrator->render(cam ,pos, prim_gdp, isect, hit_info, lights);
+		UT_Vector3F color(0,0,0);	
+		color = pix[int(prim_it.getOffset())];
 		Cd.set(*prim_it, color);
 	}
 	
 	Cd.bumpDataId();
 	
+
+
 	return error();
 }
 

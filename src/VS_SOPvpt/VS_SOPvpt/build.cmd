@@ -1,0 +1,2 @@
+hcustom -E -i .\x64\Release -l cudart_static.lib -l render_kernels.obj -L "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\lib\x64" -L ".\x64\Release" -I "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include" renderHub.cpp
+hcustom -l renderHub.o -l cudart_static.lib -l render_kernels.obj -L "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\lib\x64" -L ".\x64\Release" -I "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include" SOP_vpt.cpp
