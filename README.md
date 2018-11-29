@@ -25,7 +25,7 @@ Please see the examples folder
 
 ## Author
 
-* **Sergen Eren** - *website* - [Vimeo](Vimeo.com/sergeneren)
+* **Sergen Eren** - [My website](https://sergeneren.com) - [Vimeo](Vimeo.com/sergeneren)
 
 ## License
 This project is licensed under GNU General Public License v3.0
