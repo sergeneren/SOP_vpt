@@ -28,7 +28,7 @@ Please see the examples folder
 * **Sergen Eren** - [My website](https://sergeneren.com) - [Vimeo](Vimeo.com/sergeneren)
 
 ## Status
-This project is closed to development and maintenance 
+:red_circle: This project is closed to development and maintenance 
 
 ## License
 This project is licensed under GNU General Public License v3.0
